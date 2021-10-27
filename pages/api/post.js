@@ -10,11 +10,14 @@ export default async function handler(req, res) {
         node {
           id,
           name,
+          description,
           votesCount,
           featuredAt,
           thumbnail {
             url
-          }
+          },
+          url,
+          website
         }
       }
     }
@@ -24,8 +27,8 @@ export default async function handler(req, res) {
   const endpoint = 'https://api.producthunt.com/v2/api/graphql';
   const client = new GraphQLClient(endpoint, {
     headers: {
-      Authorization: `Bearer ${token}`
-    }
+      Authorization: `Bearer ${token}`,
+    },
   });
 
   try {
@@ -34,5 +37,4 @@ export default async function handler(req, res) {
   } catch (error) {
     res.status(500).json({ error: error });
   }
-
 }
